@@ -13,4 +13,5 @@ public interface IUserService {
     UserDto updateUser(Long userId, UserDto userDto);
 
     String deleteUser(Long userId);
+    UserDto findByUserEmail(String email);
 }

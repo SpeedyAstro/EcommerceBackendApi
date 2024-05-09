@@ -56,7 +56,8 @@ public class AuthController {
         String token = jwtUtil.generateToken(userDTO.getEmail());
 //        return userDto and token both
         Map<String, Object> response = new HashMap<>();
-        response.put("user", userDTO);
+        response.put("userId", userDTO.getUserId());
+        response.put("email", userDTO.getEmail());
         response.put("token", token);
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }
@@ -69,8 +70,12 @@ public class AuthController {
         authenticationManager.authenticate(authCredentials);
 
         String token = jwtUtil.generateToken(credentials.getEmail());
-
-        return Collections.singletonMap("token", token);
+        UserDto byUserEmail = service.findByUserEmail(credentials.getEmail());
+        Map<String, Object> response = new HashMap<>();
+        response.put("userId", byUserEmail.getUserId());
+        response.put("email", byUserEmail.getEmail());
+        response.put("token", token);
+        return response;
     }
 
     @GetMapping("/check")

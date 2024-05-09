@@ -22,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -29,6 +30,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class UserService implements IUserService {
     @Autowired
     private UserRepository userRepo;
@@ -231,5 +233,14 @@ public class UserService implements IUserService {
         userRepo.delete(user);
 
         return "User with userId " + userId + " deleted successfully!!!";
+    }
+
+    @Override
+    public UserDto findByUserEmail(String email) {
+        User user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
+
+        UserDto userDTO = modelMapper.map(user, UserDto.class);
+        return userDTO;
     }
 }
