@@ -70,7 +70,7 @@ public class AuthController {
 
         String token = jwtUtil.generateToken(credentials.getEmail());
 
-        return Collections.singletonMap("jwt-token", token);
+        return Collections.singletonMap("token", token);
     }
 
     @GetMapping("/check")
