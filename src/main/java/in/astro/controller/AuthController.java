@@ -57,7 +57,6 @@ public class AuthController {
 //        return userDto and token both
         Map<String, Object> response = new HashMap<>();
         response.put("userId", userDTO.getUserId());
-        response.put("email", userDTO.getEmail());
         response.put("token", token);
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }
@@ -73,7 +72,6 @@ public class AuthController {
         UserDto byUserEmail = service.findByUserEmail(credentials.getEmail());
         Map<String, Object> response = new HashMap<>();
         response.put("userId", byUserEmail.getUserId());
-        response.put("email", byUserEmail.getEmail());
         response.put("token", token);
         return response;
     }
