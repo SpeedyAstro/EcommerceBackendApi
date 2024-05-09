@@ -57,7 +57,7 @@ public class AuthController {
 //        return userDto and token both
         Map<String, Object> response = new HashMap<>();
         response.put("user", userDTO);
-        response.put("jwt-token", token);
+        response.put("token", token);
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }
     @PostMapping("/login")
