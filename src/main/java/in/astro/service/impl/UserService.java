@@ -243,4 +243,18 @@ public class UserService implements IUserService {
         UserDto userDTO = modelMapper.map(user, UserDto.class);
         return userDTO;
     }
+
+    @Override
+    public String changeRole(Long userId, String role) {
+        if (!role.equalsIgnoreCase("admin") && !role.equalsIgnoreCase("user")) {
+            throw new APIException("Role should be either admin or user");
+        }
+        User user = userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "userId", userId));
+//        remove all roles from user and set new role
+        user.getRoles().clear();
+        Role newRole = roleRepo.findByRoleName(role.toUpperCase()).orElseThrow(() -> new ResourceNotFoundException("Role", "role", role));
+        user.getRoles().add(newRole);
+        userRepo.save(user);
+        return "Role changed successfully!!!";
+    }
 }

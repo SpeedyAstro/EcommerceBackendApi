@@ -14,4 +14,6 @@ public interface IUserService {
 
     String deleteUser(Long userId);
     UserDto findByUserEmail(String email);
+
+    String changeRole(Long userId, String role);
 }
