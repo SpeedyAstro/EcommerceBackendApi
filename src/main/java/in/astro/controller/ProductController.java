@@ -2,8 +2,10 @@ package in.astro.controller;
 
 import in.astro.config.AppConstants;
 import in.astro.dto.ProductDTO;
+import in.astro.dto.ProductRequest;
 import in.astro.dto.ProductResponse;
 import in.astro.entity.Product;
+import in.astro.exceptions.APIException;
 import in.astro.service.IProductService;
 import in.astro.service.impl.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,11 +26,13 @@ public class ProductController {
     @Autowired
     private IProductService productService;
 
-    @PostMapping("/admin/categories/{categoryId}/product")
+    @PostMapping("/admin/add/product")
     @Operation(summary = "Add Product", description = "Add Product to Category")
-    public ResponseEntity<ProductDTO> addProduct(@RequestBody Product product, @PathVariable Long categoryId) {
-
-        ProductDTO savedProduct = productService.addProduct(categoryId, product);
+    public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductRequest product, @RequestParam("image") MultipartFile image) throws Exception {
+        if (product.getCategoryId() == null) {
+            throw new APIException("Category Id is required");
+        }
+        ProductDTO savedProduct = productService.addProduct(product.getCategoryId(), product, image);
 
         return new ResponseEntity<ProductDTO>(savedProduct, HttpStatus.CREATED);
     }

@@ -2,6 +2,7 @@ package in.astro.service.impl;
 
 import in.astro.dto.CartDto;
 import in.astro.dto.ProductDTO;
+import in.astro.dto.ProductRequest;
 import in.astro.dto.ProductResponse;
 import in.astro.entity.Cart;
 import in.astro.entity.Category;
@@ -45,7 +46,7 @@ public class ProductService implements IProductService {
     @Autowired
     private CloudinaryService cloudinaryService;
     @Override
-    public ProductDTO addProduct(Long categoryId, Product product) {
+    public ProductDTO addProduct(Long categoryId, ProductRequest product, MultipartFile image) throws IOException {
         Category category = categoryRepo.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "categoryId", categoryId));
 
@@ -53,11 +54,16 @@ public class ProductService implements IProductService {
         if (isProductExist) {
             throw new ResourceNotFoundException("Product", "productName", product.getProductName());
         }
-        product.setCategory(category);
+        if (image!=null) {
+            log.info("Uploading Image to Cloudinary...");
+            Map<?, ?> map = cloudinaryService.uploadImage(image);
+            product.setImageUrl(map.get("url").toString());
+        }
+        Product newProduct = new Product();
+        newProduct.setCategory(category);
         double specialPrice = product.getPrice() - ((product.getDiscount() * 0.01) * product.getPrice());
-        product.setSpecialPrice(specialPrice);
-        Product savedProduct = productRepo.save(product);
-
+        newProduct.setSpecialPrice(specialPrice);
+        Product savedProduct = productRepo.save(newProduct);
         return modelMapper.map(savedProduct, ProductDTO.class);
     }
 

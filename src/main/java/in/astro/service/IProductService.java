@@ -1,6 +1,7 @@
 package in.astro.service;
 
 import in.astro.dto.ProductDTO;
+import in.astro.dto.ProductRequest;
 import in.astro.dto.ProductResponse;
 import in.astro.entity.Product;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 public interface IProductService {
-    ProductDTO addProduct(Long categoryId, Product product);
+    ProductDTO addProduct(Long categoryId, ProductRequest product, MultipartFile image) throws IOException;
 
     ProductResponse getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder);
 
