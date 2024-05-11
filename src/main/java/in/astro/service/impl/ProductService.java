@@ -60,6 +60,7 @@ public class ProductService implements IProductService {
             product.setImageUrl(map.get("url").toString());
         }
         Product newProduct = new Product();
+        newProduct.setBrand(product.getBrand());
         newProduct.setCategory(category);
         double specialPrice = product.getPrice() - ((product.getDiscount() * 0.01) * product.getPrice());
         newProduct.setSpecialPrice(specialPrice);
