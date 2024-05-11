@@ -46,7 +46,7 @@ public class ProductService implements IProductService {
     @Autowired
     private CloudinaryService cloudinaryService;
     @Override
-    public ProductDTO addProduct(Long categoryId, ProductRequest product, MultipartFile image) throws IOException {
+    public ProductDTO addProduct(Long categoryId, ProductRequest product ) {
         Category category = categoryRepo.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "categoryId", categoryId));
 
@@ -54,16 +54,23 @@ public class ProductService implements IProductService {
         if (isProductExist) {
             throw new ResourceNotFoundException("Product", "productName", product.getProductName());
         }
-        if (image!=null) {
-            log.info("Uploading Image to Cloudinary...");
-            Map<?, ?> map = cloudinaryService.uploadImage(image);
-            product.setImageUrl(map.get("url").toString());
-        }
         Product newProduct = new Product();
         newProduct.setBrand(product.getBrand());
         newProduct.setCategory(category);
+        newProduct.setProductName(product.getProductName());
+        newProduct.setPrice(product.getPrice());
+        newProduct.setDiscount(product.getDiscount());
+        newProduct.setDescription(product.getDescription());
+        newProduct.setQuantity(product.getQuantity());
         double specialPrice = product.getPrice() - ((product.getDiscount() * 0.01) * product.getPrice());
         newProduct.setSpecialPrice(specialPrice);
+        if (product.getImageUrl()!=null && product.getImageUrl().length > 0) {
+            StringBuilder imageUrl = new StringBuilder();
+            for (String image : product.getImageUrl()) {
+                imageUrl.append(image).append(",");
+            }
+            newProduct.setImageUrl(imageUrl.toString());
+        }
         Product savedProduct = productRepo.save(newProduct);
         return modelMapper.map(savedProduct, ProductDTO.class);
     }
@@ -191,5 +198,11 @@ public class ProductService implements IProductService {
         productRepo.delete(product);
 
         return "Product with productId: " + productId + " deleted successfully !!!";
+    }
+
+    @Override
+    public Map<?,?> uploadImage(MultipartFile image) {
+            Map<?, ?> map = cloudinaryService.uploadImage(image);
+            return map;
     }
 }

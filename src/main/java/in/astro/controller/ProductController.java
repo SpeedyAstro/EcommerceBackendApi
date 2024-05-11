@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -28,11 +29,11 @@ public class ProductController {
 
     @PostMapping("/admin/add/product")
     @Operation(summary = "Add Product", description = "Add Product to Category")
-    public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductRequest product, @RequestParam("image") MultipartFile image) throws Exception {
+    public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductRequest product) {
         if (product.getCategoryId() == null) {
             throw new APIException("Category Id is required");
         }
-        ProductDTO savedProduct = productService.addProduct(product.getCategoryId(), product, image);
+        ProductDTO savedProduct = productService.addProduct(product.getCategoryId(), product);
 
         return new ResponseEntity<ProductDTO>(savedProduct, HttpStatus.CREATED);
     }
@@ -91,6 +92,13 @@ public class ProductController {
         ProductDTO updatedProduct = productService.updateProductImage(productId, image);
 
         return new ResponseEntity<ProductDTO>(updatedProduct, HttpStatus.OK);
+    }
+
+    @PostMapping("/admin/products/upload/image")
+    @Operation(summary = "Upload Product Image", description = "Upload Product Image")
+    public Map<?,?> uploadProductImage(@RequestParam("image") MultipartFile image) throws IOException {
+        Map<?,?> map = productService.uploadImage(image);
+        return map;
     }
 
     @DeleteMapping("/admin/products/{productId}")

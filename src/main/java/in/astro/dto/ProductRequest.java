@@ -15,5 +15,5 @@ public class ProductRequest {
     private double price;
     private Integer quantity;
     private double discount;
-    private String imageUrl;
+    private String[] imageUrl;
 }

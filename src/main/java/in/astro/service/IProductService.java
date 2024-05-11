@@ -7,9 +7,10 @@ import in.astro.entity.Product;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Map;
 
 public interface IProductService {
-    ProductDTO addProduct(Long categoryId, ProductRequest product, MultipartFile image) throws IOException;
+    ProductDTO addProduct(Long categoryId, ProductRequest product);
 
     ProductResponse getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder);
 
@@ -25,4 +26,5 @@ public interface IProductService {
 
     String deleteProduct(Long productId);
 
+    Map<?,?> uploadImage(MultipartFile image);
 }

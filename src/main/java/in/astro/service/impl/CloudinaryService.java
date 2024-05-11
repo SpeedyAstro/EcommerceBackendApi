@@ -1,6 +1,7 @@
 package in.astro.service.impl;
 
 import com.cloudinary.Cloudinary;
+import in.astro.exceptions.APIException;
 import in.astro.service.ICloudinaryImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class CloudinaryService implements ICloudinaryImageService {
         try {
            return this.cloudinary.uploader().upload(file.getBytes(), Map.of());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new APIException("Error while uploading image");
         }
     }
 }
