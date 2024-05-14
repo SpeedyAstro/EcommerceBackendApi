@@ -37,7 +37,7 @@ public class SecurityConfig {
         http
                 .cors().and().csrf().disable()
                 .authorizeHttpRequests()
-                .antMatchers("/swagger-ui.html", "/swagger-ui/**","/v3/api-docs/**", "/api/register", "/api/login").permitAll()
+                .antMatchers("/swagger-ui.html", "/swagger-ui/**","/v3/api-docs/**", "/api/register", "/api/login","/api/admin/products/upload/image").permitAll()
                 .antMatchers(AppConstants.PUBLIC_URLS).permitAll()
                 .antMatchers(AppConstants.USER_URLS).hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(AppConstants.ADMIN_URLS).hasAuthority("ADMIN")
