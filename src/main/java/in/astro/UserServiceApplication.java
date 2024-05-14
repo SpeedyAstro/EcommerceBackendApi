@@ -19,6 +19,7 @@ import org.springframework.context.annotation.Bean;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @SpringBootApplication
 @SecurityScheme(name = "E-Commerce Application", scheme = "bearer", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
@@ -64,17 +65,21 @@ public class UserServiceApplication implements CommandLineRunner{
 
             List<Role> savedRoles = roleRepo.saveAll(roles);
 
-            List<String> categoriesList = List.of("Fashion", "Electronics", "Home Appliances", "Books", "Furniture", "Grocery", "Beauty", "Toys", "Sports", "Automobiles", "Stationary", "Footwear", "Jewellery", "Accessories", "Health", "Fitness", "Bags", "Watches", "Mobiles", "Laptops", "Cameras", "Headphones", "Speakers", "Smart Watches", "Smart Bands", "Smart Glasses", "Smart Home", "Smart Wearables", "Smart Speakers", "Smart Cameras", "Smart Appliances", "Smart Security", "Smart Health", "Smart Fitness", "Smart Beauty", "Smart Toys", "Smart Automobiles", "Smart Stationary", "Smart Footwear", "Smart Jewellery", "Smart Accessories", "Smart Bags", "Smart Watches", "Smart Mobiles", "Smart Laptops", "Smart Cameras", "Smart Headphones", "Smart Speakers", "Smart Wearables", "Smart Glasses", "Smart Home", "Smart Appliances", "Smart Security", "Smart Health", "Smart Fitness", "Smart Beauty", "Smart Toys", "Smart Automobiles", "Smart Stationary", "Smart Footwear", "Smart Jewellery", "Smart Accessories", "Smart Bags", "Smart Watches", "Smart Mobiles", "Smart Laptops", "Smart Cameras", "Smart Headphones", "Smart Speakers", "Smart Wearables", "Smart Glasses", "Smart Home", "Smart Appliances", "Smart Security", "Smart Health", "Smart Fitness", "Smart Beauty", "Smart Toys", "Smart Automobiles", "Smart Stationary", "Smart");
-            long i = 101;
-            for (String category : categoriesList) {
-                Category newCategory = new Category();
-                newCategory.setCategoryName(category);
-                newCategory.setCategoryId(i);
-                categoryRepo.save(newCategory);
-                i++;
+            Optional<Category> byId = categoryRepo.findById(1L);
+            byId.ifPresent(category -> {
+                System.out.println("Category with id 1 is present");
+            });
+            if (byId.isEmpty()) {
+                List<String> categoriesList = List.of("Fashion", "Electronics", "Home Appliances", "Books", "Furniture", "Grocery", "Beauty", "Toys", "Sports", "Automobiles", "Stationary", "Footwear", "Jewellery", "Accessories", "Health", "Fitness", "Bags", "Watches", "Mobiles", "Laptops", "Cameras", "Headphones", "Speakers", "Smart Watches", "Smart Bands", "Smart Glasses", "Smart Home", "Smart Wearables", "Smart Speakers", "Smart Cameras", "Smart Appliances", "Smart Security", "Smart Health", "Smart Fitness", "Smart Beauty", "Smart Toys", "Smart Automobiles", "Smart Stationary", "Smart Footwear", "Smart Jewellery", "Smart Accessories", "Smart Bags", "Smart Watches", "Smart Mobiles", "Smart Laptops", "Smart Cameras", "Smart Headphones", "Smart Speakers", "Smart Wearables", "Smart Glasses", "Smart Home", "Smart Appliances", "Smart Security", "Smart Health", "Smart Fitness", "Smart Beauty", "Smart Toys", "Smart Automobiles", "Smart Stationary", "Smart Footwear", "Smart Jewellery", "Smart Accessories", "Smart Bags", "Smart Watches", "Smart Mobiles", "Smart Laptops", "Smart Cameras", "Smart Headphones", "Smart Speakers", "Smart Wearables", "Smart Glasses", "Smart Home", "Smart Appliances", "Smart Security", "Smart Health", "Smart Fitness", "Smart Beauty", "Smart Toys", "Smart Automobiles", "Smart Stationary", "Smart");
+                long i = 1L;
+                for (String category : categoriesList) {
+                    Category newCategory = new Category();
+                    newCategory.setCategoryName(category);
+                    newCategory.setCategoryId(i);
+                    categoryRepo.save(newCategory);
+                    i++;
+                }
             }
-
-
             savedRoles.forEach(System.out::println);
 
         } catch (Exception e) {
