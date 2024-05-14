@@ -65,7 +65,7 @@ public class UserServiceApplication implements CommandLineRunner{
             List<Role> savedRoles = roleRepo.saveAll(roles);
 
             List<String> categoriesList = List.of("Fashion", "Electronics", "Home Appliances", "Books", "Furniture", "Grocery", "Beauty", "Toys", "Sports", "Automobiles", "Stationary", "Footwear", "Jewellery", "Accessories", "Health", "Fitness", "Bags", "Watches", "Mobiles", "Laptops", "Cameras", "Headphones", "Speakers", "Smart Watches", "Smart Bands", "Smart Glasses", "Smart Home", "Smart Wearables", "Smart Speakers", "Smart Cameras", "Smart Appliances", "Smart Security", "Smart Health", "Smart Fitness", "Smart Beauty", "Smart Toys", "Smart Automobiles", "Smart Stationary", "Smart Footwear", "Smart Jewellery", "Smart Accessories", "Smart Bags", "Smart Watches", "Smart Mobiles", "Smart Laptops", "Smart Cameras", "Smart Headphones", "Smart Speakers", "Smart Wearables", "Smart Glasses", "Smart Home", "Smart Appliances", "Smart Security", "Smart Health", "Smart Fitness", "Smart Beauty", "Smart Toys", "Smart Automobiles", "Smart Stationary", "Smart Footwear", "Smart Jewellery", "Smart Accessories", "Smart Bags", "Smart Watches", "Smart Mobiles", "Smart Laptops", "Smart Cameras", "Smart Headphones", "Smart Speakers", "Smart Wearables", "Smart Glasses", "Smart Home", "Smart Appliances", "Smart Security", "Smart Health", "Smart Fitness", "Smart Beauty", "Smart Toys", "Smart Automobiles", "Smart Stationary", "Smart");
-            long i = 1;
+            long i = 101;
             for (String category : categoriesList) {
                 Category newCategory = new Category();
                 newCategory.setCategoryName(category);
