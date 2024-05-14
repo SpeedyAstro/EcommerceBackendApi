@@ -2,7 +2,9 @@ package in.astro;
 
 import com.cloudinary.Cloudinary;
 import in.astro.config.AppConstants;
+import in.astro.entity.Category;
 import in.astro.entity.Role;
+import in.astro.repository.CategoryRepository;
 import in.astro.repository.RoleRepo;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
@@ -24,6 +26,9 @@ public class UserServiceApplication implements CommandLineRunner{
 
     @Autowired
     private RoleRepo roleRepo;
+
+    @Autowired
+    private CategoryRepository categoryRepo;
 
     public static void main(String[] args) {
         SpringApplication.run(UserServiceApplication.class, args);
@@ -58,6 +63,17 @@ public class UserServiceApplication implements CommandLineRunner{
             List<Role> roles = List.of(adminRole, userRole);
 
             List<Role> savedRoles = roleRepo.saveAll(roles);
+
+            List<String> categoriesList = List.of("Fashion", "Electronics", "Home Appliances", "Books", "Furniture", "Grocery", "Beauty", "Toys", "Sports", "Automobiles", "Stationary", "Footwear", "Jewellery", "Accessories", "Health", "Fitness", "Bags", "Watches", "Mobiles", "Laptops", "Cameras", "Headphones", "Speakers", "Smart Watches", "Smart Bands", "Smart Glasses", "Smart Home", "Smart Wearables", "Smart Speakers", "Smart Cameras", "Smart Appliances", "Smart Security", "Smart Health", "Smart Fitness", "Smart Beauty", "Smart Toys", "Smart Automobiles", "Smart Stationary", "Smart Footwear", "Smart Jewellery", "Smart Accessories", "Smart Bags", "Smart Watches", "Smart Mobiles", "Smart Laptops", "Smart Cameras", "Smart Headphones", "Smart Speakers", "Smart Wearables", "Smart Glasses", "Smart Home", "Smart Appliances", "Smart Security", "Smart Health", "Smart Fitness", "Smart Beauty", "Smart Toys", "Smart Automobiles", "Smart Stationary", "Smart Footwear", "Smart Jewellery", "Smart Accessories", "Smart Bags", "Smart Watches", "Smart Mobiles", "Smart Laptops", "Smart Cameras", "Smart Headphones", "Smart Speakers", "Smart Wearables", "Smart Glasses", "Smart Home", "Smart Appliances", "Smart Security", "Smart Health", "Smart Fitness", "Smart Beauty", "Smart Toys", "Smart Automobiles", "Smart Stationary", "Smart");
+            long i = 1;
+            for (String category : categoriesList) {
+                Category newCategory = new Category();
+                newCategory.setCategoryName(category);
+                newCategory.setCategoryId(i);
+                categoryRepo.save(newCategory);
+                i++;
+            }
+
 
             savedRoles.forEach(System.out::println);
 
