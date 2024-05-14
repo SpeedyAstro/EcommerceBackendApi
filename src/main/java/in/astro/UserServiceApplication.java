@@ -70,7 +70,22 @@ public class UserServiceApplication implements CommandLineRunner{
                 System.out.println("Category with id 1 is present");
             });
             if (byId.isEmpty()) {
-                List<String> categoriesList = List.of("Fashion", "Electronics", "Home Appliances", "Books", "Furniture", "Grocery", "Beauty", "Toys", "Sports", "Automobiles", "Stationary", "Footwear", "Jewellery", "Accessories", "Health", "Fitness", "Bags", "Watches", "Mobiles", "Laptops", "Cameras", "Headphones", "Speakers", "Smart Watches", "Smart Bands", "Smart Glasses", "Smart Home", "Smart Wearables", "Smart Speakers", "Smart Cameras", "Smart Appliances", "Smart Security", "Smart Health", "Smart Fitness", "Smart Beauty", "Smart Toys", "Smart Automobiles", "Smart Stationary", "Smart Footwear", "Smart Jewellery", "Smart Accessories", "Smart Bags", "Smart Watches", "Smart Mobiles", "Smart Laptops", "Smart Cameras", "Smart Headphones", "Smart Speakers", "Smart Wearables", "Smart Glasses", "Smart Home", "Smart Appliances", "Smart Security", "Smart Health", "Smart Fitness", "Smart Beauty", "Smart Toys", "Smart Automobiles", "Smart Stationary", "Smart Footwear", "Smart Jewellery", "Smart Accessories", "Smart Bags", "Smart Watches", "Smart Mobiles", "Smart Laptops", "Smart Cameras", "Smart Headphones", "Smart Speakers", "Smart Wearables", "Smart Glasses", "Smart Home", "Smart Appliances", "Smart Security", "Smart Health", "Smart Fitness", "Smart Beauty", "Smart Toys", "Smart Automobiles", "Smart Stationary", "Smart");
+//                const productCategory = [
+//  { id: 1, label: "Airpodes", value: "airpodes" },
+//  { id: 2, label: "Camera", value: "camera" },
+//  { id: 3, label: "Earphones", value: "earphones" },
+//  { id: 4, label: "Mobiles", value: "mobiles" },
+//  { id: 5, label: "Mouse", value: "Mouse" },
+//  { id: 6, label: "Printers", value: "printers" },
+//  { id: 7, label: "Processor", value: "processor" },
+//  { id: 8, label: "Refrigerator", value: "refrigerator" },
+//  { id: 9, label: "Speakers", value: "speakers" },
+//  { id: 10, label: "Trimmers", value: "trimmers" },
+//  { id: 11, label: "Televisions", value: "televisions" },
+//  { id: 12, label: "Watches", value: "watches" },
+//  { id: 13, label: "Others", value: "Others" },
+//];
+                List<String > categoriesList = List.of("Airpodes", "Camera", "Earphones", "Mobiles", "Mouse", "Printers", "Processor", "Refrigerator", "Speakers", "Trimmers", "Televisions", "Watches", "Others");
                 long i = 1L;
                 for (String category : categoriesList) {
                     Category newCategory = new Category();
