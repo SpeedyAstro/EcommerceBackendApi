@@ -1,8 +1,12 @@
 package in.astro.dto;
 
+import in.astro.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Data
 @NoArgsConstructor
@@ -17,5 +21,6 @@ public class ProductDTO {
     private double price;
     private double discount;
     private double specialPrice;
+    private Category category;
 
 }
