@@ -72,7 +72,10 @@ public class ProductService implements IProductService {
             newProduct.setImageUrl(imageUrl.toString());
         }
         Product savedProduct = productRepo.save(newProduct);
-        return modelMapper.map(savedProduct, ProductDTO.class);
+//        map and set category id to product
+        ProductDTO productDTO = modelMapper.map(savedProduct, ProductDTO.class);
+        productDTO.setCategoryId(categoryId);
+        return productDTO;
     }
 
     @Override
@@ -210,6 +213,8 @@ public class ProductService implements IProductService {
     public ProductDTO getProductById(Long productId) {
         Product product = productRepo.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
-        return modelMapper.map(product, ProductDTO.class);
+        ProductDTO map = modelMapper.map(product, ProductDTO.class);
+        map.setCategoryId(product.getCategory().getCategoryId());
+        return map;
     }
 }
