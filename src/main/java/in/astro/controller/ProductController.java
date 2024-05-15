@@ -108,4 +108,11 @@ public class ProductController {
 
         return new ResponseEntity<String>(status, HttpStatus.OK);
     }
+
+    @GetMapping("/public/products/{productId}")
+    @Operation(summary = "Get Product By Id", description = "Get Product By Id")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long productId) {
+        ProductDTO product = productService.getProductById(productId);
+        return new ResponseEntity<ProductDTO>(product, HttpStatus.FOUND);
+    }
 }

@@ -205,4 +205,11 @@ public class ProductService implements IProductService {
             Map<?, ?> map = cloudinaryService.uploadImage(image);
             return map;
     }
+
+    @Override
+    public ProductDTO getProductById(Long productId) {
+        Product product = productRepo.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
+        return modelMapper.map(product, ProductDTO.class);
+    }
 }

@@ -27,4 +27,6 @@ public interface IProductService {
     String deleteProduct(Long productId);
 
     Map<?,?> uploadImage(MultipartFile image);
+
+    ProductDTO getProductById(Long productId);
 }
