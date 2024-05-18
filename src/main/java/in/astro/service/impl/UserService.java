@@ -81,7 +81,7 @@ public class UserService implements IUserService {
             }
 
             user.setAddresses(List.of(address));
-            if (user.getProfilePic() == null) {
+            if (user.getProfilePic() == null || user.getProfilePic().isEmpty()) {
                 user.setProfilePic("https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png");
             }else {
                 user.setProfilePic(user.getProfilePic());
