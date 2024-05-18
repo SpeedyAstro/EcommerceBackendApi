@@ -37,7 +37,7 @@ public class UserController {
     @Operation(summary = "Get User By Id", description = "[🔍] Get User By Id")
     public ResponseEntity<UserDto> getUser(@PathVariable Long userId) {
         UserDto user = userService.getUserById(userId);
-        return new ResponseEntity<UserDto>(user, HttpStatus.FOUND);
+        return new ResponseEntity<UserDto>(user, HttpStatus.OK);
     }
 
     @PutMapping("/public/users/{userId}")
