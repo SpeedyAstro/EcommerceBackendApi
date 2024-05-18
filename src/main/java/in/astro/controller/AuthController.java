@@ -50,7 +50,6 @@ public class AuthController {
     @Operation(summary = "Register User", description = "[🎟️] Register User")
     public ResponseEntity<Map<String, Object>> registerUser(@RequestBody UserDto user) {
         String encodedPass = passwordEncoder.encode(user.getPassword());
-
         user.setPassword(encodedPass);
         UserDto userDTO = service.registerUser(user);
         String token = jwtUtil.generateToken(userDTO.getEmail());
