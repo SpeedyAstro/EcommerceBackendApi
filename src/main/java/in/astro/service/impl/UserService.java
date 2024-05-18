@@ -81,7 +81,11 @@ public class UserService implements IUserService {
             }
 
             user.setAddresses(List.of(address));
-
+            if (user.getProfilePic() == null) {
+                user.setProfilePic("https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png");
+            }else {
+                user.setProfilePic(user.getProfilePic());
+            }
             User registeredUser = userRepo.save(user);
             cart.setUser(registeredUser);
             cartRepo.save(cart);
@@ -178,6 +182,9 @@ public class UserService implements IUserService {
         user.setMobileNumber(userDTO.getMobileNumber());
         user.setEmail(userDTO.getEmail());
         user.setPassword(encodedPass);
+        if (userDTO.getProfilePic() != null) {
+            user.setProfilePic(userDTO.getProfilePic());
+        }
 
         if (userDTO.getAddress() != null) {
             String country = userDTO.getAddress().getCountry();

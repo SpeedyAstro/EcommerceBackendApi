@@ -57,8 +57,10 @@ public class UserController {
 
     @PutMapping("/admin/users/{userId}/role/{role}")
     @Operation(summary = "Change Role", description = "[🔄] Change Role")
-    public String changeRole(@PathVariable Long userId,@PathVariable String role) {
-        return userService.changeRole(userId, role);
+    public ResponseEntity<String> changeRole(@PathVariable Long userId,@PathVariable String role) {
+        String status = userService.changeRole(userId,role);
+
+        return new ResponseEntity<String>(status, HttpStatus.OK);
     }
 
 }

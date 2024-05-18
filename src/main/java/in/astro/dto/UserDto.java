@@ -23,4 +23,5 @@ public class UserDto {
     private Set<Role> roles = new HashSet<>();
     private AddressDto address;
     private CartDto cart;
+    private String profilePic;
 }
