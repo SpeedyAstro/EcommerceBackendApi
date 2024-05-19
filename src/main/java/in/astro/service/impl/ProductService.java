@@ -69,6 +69,7 @@ public class ProductService implements IProductService {
             for (String image : product.getImageUrl()) {
                 imageUrl.append(image).append(",");
             }
+            imageUrl.deleteCharAt(imageUrl.length() - 1);
             newProduct.setImageUrl(imageUrl.toString());
         }
         Product savedProduct = productRepo.save(newProduct);
