@@ -62,6 +62,7 @@ public class ProductService implements IProductService {
         newProduct.setDiscount(product.getDiscount());
         newProduct.setDescription(product.getDescription());
         newProduct.setQuantity(product.getQuantity());
+        newProduct.setBrand(product.getBrand());
         double specialPrice = product.getPrice() - ((product.getDiscount() * 0.01) * product.getPrice());
         newProduct.setSpecialPrice(specialPrice);
         if (product.getImageUrl()!=null && product.getImageUrl().length > 0) {
@@ -174,6 +175,8 @@ public class ProductService implements IProductService {
         Pageable pageDetails = PageRequest.of(pageNumber, pageSize, sortByAndOrder);
 
         Page<Product> pageProducts = productRepo.findByProductNameLike(keyword, pageDetails);
+        Page<Product> pageProducts1 = productRepo.findByBrandLike(keyword, pageDetails);
+        Page<Product> pageProducts2 = productRepo.findByDescriptionLike(keyword, pageDetails);
         List<Product> products = pageProducts.getContent();
         if (products.size() == 0) {
             throw new APIException("Products not found with keyword: " + keyword);

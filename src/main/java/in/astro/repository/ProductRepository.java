@@ -15,4 +15,11 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 
     Page<Product> findByProductNameLike(String keyword, Pageable pageDetails);
 
+// find by brand
+    @Query("SELECT p FROM Product p WHERE p.brand LIKE %?1%")
+    Page<Product> findByBrandLike(String keyword, Pageable pageDetails);
+//    find by description
+    @Query("SELECT p FROM Product p WHERE p.description LIKE %?1%")
+    Page<Product> findByDescriptionLike(String keyword, Pageable pageDetails);
+
 }
