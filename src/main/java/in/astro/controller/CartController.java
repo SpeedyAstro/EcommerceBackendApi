@@ -31,14 +31,14 @@ public class CartController {
     @Operation(summary = "Get Carts", description = "[🛍️] Get All Carts")
     public ResponseEntity<List<CartDto>> getCarts() {
         List<CartDto> cartDTOs = cartService.getAllCarts();
-        return new ResponseEntity<List<CartDto>>(cartDTOs, HttpStatus.FOUND);
+        return new ResponseEntity<List<CartDto>>(cartDTOs, HttpStatus.OK);
     }
 
     @GetMapping("/public/users/{emailId}/carts/{cartId}")
     @Operation(summary = "Get Cart By User", description = "[🛒] Get Cart By emailId and cartId")
     public ResponseEntity<CartDto> getCartById(@PathVariable String emailId, @PathVariable Long cartId) {
         CartDto cartDTO = cartService.getCart(emailId, cartId);
-        return new ResponseEntity<CartDto>(cartDTO, HttpStatus.FOUND);
+        return new ResponseEntity<CartDto>(cartDTO, HttpStatus.OK);
     }
 
     @PutMapping("/public/carts/{cartId}/products/{productId}/quantity/{quantity}")

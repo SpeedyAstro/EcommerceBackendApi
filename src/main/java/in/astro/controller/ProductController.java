@@ -48,7 +48,7 @@ public class ProductController {
 
         ProductResponse productResponse = productService.getAllProducts(pageNumber, pageSize, sortBy, sortOrder);
 
-        return new ResponseEntity<ProductResponse>(productResponse, HttpStatus.FOUND);
+        return new ResponseEntity<ProductResponse>(productResponse, HttpStatus.OK);
     }
 
     @GetMapping("/public/categories/{categoryId}/products")
@@ -62,7 +62,7 @@ public class ProductController {
         ProductResponse productResponse = productService.searchByCategory(categoryId, pageNumber, pageSize, sortBy,
                 sortOrder);
 
-        return new ResponseEntity<ProductResponse>(productResponse, HttpStatus.FOUND);
+        return new ResponseEntity<ProductResponse>(productResponse, HttpStatus.OK);
     }
 
     @GetMapping("/public/products/keyword/{keyword}")
@@ -76,7 +76,7 @@ public class ProductController {
         ProductResponse productResponse = productService.searchProductByKeyword(keyword, pageNumber, pageSize, sortBy,
                 sortOrder);
 
-        return new ResponseEntity<ProductResponse>(productResponse, HttpStatus.FOUND);
+        return new ResponseEntity<ProductResponse>(productResponse, HttpStatus.OK);
     }
     @PutMapping("/admin/products/{productId}")
     @Operation(summary = "Update Product", description = "Update Product")
@@ -113,6 +113,6 @@ public class ProductController {
     @Operation(summary = "Get Product By Id", description = "Get Product By Id")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable Long productId) {
         ProductDTO product = productService.getProductById(productId);
-        return new ResponseEntity<ProductDTO>(product, HttpStatus.FOUND);
+        return new ResponseEntity<ProductDTO>(product, HttpStatus.OK);
     }
 }

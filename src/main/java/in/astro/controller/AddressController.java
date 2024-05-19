@@ -22,20 +22,20 @@ public class AddressController {
     public ResponseEntity<AddressDto> createAddress(@RequestBody AddressDto addressDTO) {
         AddressDto savedAddressDTO = addressService.createAddress(addressDTO);
 
-        return new ResponseEntity<AddressDto>(savedAddressDTO, HttpStatus.CREATED);
+        return new ResponseEntity<AddressDto>(savedAddressDTO, HttpStatus.OK);
     }
     @GetMapping("/addresses/{addressId}")
     public ResponseEntity<AddressDto> getAddress(@PathVariable Long addressId) {
         AddressDto addressDTO = addressService.getAddress(addressId);
 
-        return new ResponseEntity<AddressDto>(addressDTO, HttpStatus.FOUND);
+        return new ResponseEntity<AddressDto>(addressDTO, HttpStatus.OK);
     }
 
     @GetMapping("/addresses")
     public ResponseEntity<List<AddressDto>> getAddresses() {
         List<AddressDto> addressDTOs = addressService.getAddresses();
 
-        return new ResponseEntity<List<AddressDto>>(addressDTOs, HttpStatus.FOUND);
+        return new ResponseEntity<List<AddressDto>>(addressDTOs, HttpStatus.OK);
     }
 
     @PutMapping("/addresses/{addressId}")

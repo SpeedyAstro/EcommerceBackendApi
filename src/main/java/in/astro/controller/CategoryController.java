@@ -41,7 +41,7 @@ public class CategoryController {
 
         CategoryResponse categoryResponse = categoryService.getCategories(pageNumber, pageSize, sortBy, sortOrder);
 
-        return new ResponseEntity<CategoryResponse>(categoryResponse, HttpStatus.FOUND);
+        return new ResponseEntity<CategoryResponse>(categoryResponse, HttpStatus.OK);
     }
 
     @PutMapping("/admin/categories/{categoryId}")

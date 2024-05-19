@@ -30,7 +30,7 @@ public class UserController {
 
         UserResponse userResponse = userService.getAllUsers(pageNumber, pageSize, sortBy, sortOrder);
 
-        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.FOUND);
+        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
     }
 
     @GetMapping("/public/users/{userId}")
