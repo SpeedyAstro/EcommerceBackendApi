@@ -22,5 +22,5 @@ public class ProductDTO {
     private double discount;
     private double specialPrice;
     private Long categoryId;
-
+    private String brand;
 }

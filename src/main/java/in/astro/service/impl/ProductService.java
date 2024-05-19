@@ -178,7 +178,9 @@ public class ProductService implements IProductService {
         Page<Product> pageProducts1 = productRepo.findByBrandLike(keyword, pageDetails);
         Page<Product> pageProducts2 = productRepo.findByDescriptionLike(keyword, pageDetails);
         List<Product> products = pageProducts.getContent();
-        if (products.size() == 0) {
+        products.addAll(pageProducts1.getContent());
+        products.addAll(pageProducts2.getContent());
+        if (products.size() == 0 && pageProducts1.getContent().size() == 0 && pageProducts2.getContent().size() == 0){
             throw new APIException("Products not found with keyword: " + keyword);
         }
         List<ProductDTO> productDTOs = products.stream().map(p -> modelMapper.map(p, ProductDTO.class))
